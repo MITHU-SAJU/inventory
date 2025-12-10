@@ -9,6 +9,89 @@ body {
     line-height: 1.6;
     color: #1e293b;
 }
+
+/* ---------- Background Animation ---------- */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff6f91, #845ec2, #2c73d2, #0081cf, #00c9a7);
+    background-size: 400% 400%;
+    animation: gradientMove 10s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ---------- Login Card ---------- */
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: floatEffect 3s ease-in-out infinite;
+}
+
+@keyframes floatEffect {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+}
+
+/* ---------- Input Styling ---------- */
+.input-style {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    padding: 12px;
+    transition: 0.3s ease;
+}
+
+.input-style::placeholder {
+    color: #ddd;
+}
+
+.input-style:focus {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    color: white;
+}
+
+/* ---------- Button ---------- */
+.login-btn {
+    background: linear-gradient(90deg, #ff9a9e, #fad0c4);
+    border: none;
+    padding: 12px;
+    border-radius: 50px;
+    color: #000;
+    font-weight: bold;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.4);
+}
+
+/* ---------- Links ---------- */
+a {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 .header-bar {
     background: #ffffff;
     border: 1px solid #e5e7eb;
@@ -725,7 +808,7 @@ select{
 
 .size-box {
     border: 2px solid #e2e8f0;
-    padding: 16px 8px;
+    padding: 16px 35px;
     border-radius: 10px;
     text-align: center;
     cursor: pointer;

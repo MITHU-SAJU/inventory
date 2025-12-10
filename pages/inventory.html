@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- BOOTSTRAP CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- DATATABLE CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <style>
+        .circle-dot {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .size-box {
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            text-align: center;
+            width: 55px;
+        }
+    </style>
+</head>
+
+<!-- MAIN DASHBOARD WRAPPER -->
+<div class="d-flex">
+
+    <!-- Sidebar Component -->
+    <div include-html="../components/sidebar.html"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main p-4 flex-grow-1">
+
+        <!-- Header -->
+        <header class="d-flex justify-content-between align-items-center mb-3 px-3 py-1 header-bar">
+
+            <h2>Inventory</h2>
+
+            <!-- Profile Dropdown -->
+            <div class="dropdown">
+                <button class="btn border-0 d-flex align-items-center" data-bs-toggle="dropdown">
+                    <i class="bi bi-person-circle fs-2"></i>
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-end shadow">
+                    <li><a class="dropdown-item" href="#">My Profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+                </ul>
+            </div>
+        </header>
+
+
+        <div class="container-fluid py-1">
+            <!-- Table Card -->
+            <div class="card shadow-sm p-4" style="border-radius: 16px;">
+
+                <!-- TOGGLE BUTTONS -->
+                <div class="mb-3 d-flex gap-2">
+                    <button class="btn btn-primary btn-sm" id="btnSize">SIZE View</button>
+                    <button class="btn btn-outline-primary btn-sm" id="btnSKU">SKU View</button>
+                </div>
+
+                <!-- ========================= SIZE VIEW ========================= -->
+                <div id="sizeView">
+
+
+
+                    <div class="d-flex gap-3 ms-4">
+                        <div class="size-box">S <span>-</span> <br><b>10</b></div>
+                        <div class="size-box">M <span>-</span><br><b>20</b></div>
+                        <div class="size-box">L <span>-</span><br><b>20</b></div>
+                        <div class="size-box">XL <span>-</span><br><b>20</b></div>
+                    </div>
+
+                    <div class="mt-3 ms-4">
+                        <label class="fw-semibold">Total Qty:</label>
+                        <input type="text" class="form-control w-25 bg-light" value="70" readonly>
+                    </div>
+                </div>
+
+                <!-- ========================= SKU VIEW (TABLE FORMAT) ========================= -->
+                <div id="skuView" class="d-none">
+
+
+
+                    <table class="table table-bordered mt-2">
+                        <thead class="table-light">
+                            <tr>
+                                <th style="width: 50px;">#</th>
+                                <th>Stylecode (Color + size)</th>
+                                <th style="width: 80px;">Qty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>10976-Blue-S</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>10976-Blue-M</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>10976-Blue-L</td>
+                                <td>20</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>10976-Blue-XL</td>
+                                <td>20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- INCLUDE HTML -->
+<script src="../assets/js/include.js"></script>
+
+<!-- CUSTOM DASHBOARD JS -->
+<script src="../assets/js/script.js"></script>
+
+<script>
+    const btnSize = document.getElementById("btnSize");
+    const btnSKU = document.getElementById("btnSKU");
+
+    const sizeView = document.getElementById("sizeView");
+    const skuView = document.getElementById("skuView");
+
+    btnSize.addEventListener("click", () => {
+        sizeView.classList.remove("d-none");
+        skuView.classList.add("d-none");
+
+        btnSize.classList.add("btn-primary");
+        btnSize.classList.remove("btn-outline-primary");
+        btnSKU.classList.remove("btn-primary");
+        btnSKU.classList.add("btn-outline-primary");
+    });
+
+    btnSKU.addEventListener("click", () => {
+        skuView.classList.remove("d-none");
+        sizeView.classList.add("d-none");
+
+        btnSKU.classList.add("btn-primary");
+        btnSKU.classList.remove("btn-outline-primary");
+        btnSize.classList.remove("btn-primary");
+        btnSize.classList.add("btn-outline-primary");
+    });
+</script>
