@@ -1209,3 +1209,68 @@ table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>th.sorting_asc, ta
     outline: none;
     box-shadow: 0 0 0 3px rgba(99,102,241,0.3);
 }
+
+
+
+ /* Small & neat action buttons */
+        .action-btn {
+            padding: 4px 6px;
+            line-height: 1;
+        }
+
+        .action-btn i {
+            font-size: 14px;
+        }
+
+        table.dataTable td {
+            vertical-align: middle;
+        }
+
+
+
+/* for adding new address */
+.radio-card-wrapper {
+  flex: 1 1 45%;
+  cursor: pointer;
+}
+
+.radio-card {
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.radio-card-wrapper:hover .radio-card {
+  transform: translateY(-3px);
+  border-color: #0056b3;
+  background: linear-gradient(135deg, #f0f4ff, #ffffff);
+  box-shadow: 0 10px 20px rgba(108, 99, 255, 0.1);
+}
+
+.radio-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+  transition: all 0.3s ease;
+  background-color: #fff;
+}
+
+.radio-card-wrapper input[type="radio"]:checked + .radio-card .radio-dot {
+  background-color: #0056b3;
+  border-color:#0056b3;
+  box-shadow: 0 0 0 6px rgba(108, 99, 255, 0.15);
+}
+
+.radio-card-wrapper input[type="radio"]:checked + .radio-card {
+  border-color: #0056b3;
+  background-color: #eef1ff;
+  box-shadow: 0 10px 25px rgba(108, 99, 255, 0.15);
+}

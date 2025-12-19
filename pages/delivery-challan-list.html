@@ -67,72 +67,87 @@
 
                     <!-- DESKTOP TABLE -->
                     <div class="table-responsive d-none d-md-block">
-                        <table id="productTable" class="table table-striped table-hover align-middle text-center"
+                        <table id="dcTable" class="table table-striped table-hover align-middle text-center"
                             style="width:100%">
                             <thead class="table-light text-center">
                                 <tr>
                                     <th>S.No</th>
-                                    <th>Image</th>
-                                    <th>Product Code</th>
-                                    <th>Colour</th>
-                                    <th>Sizes</th>
-                                    <th>MRP</th>
-                                    <th>S.P</th>
-                                    <th>C.P</th>
+                                    <th>DC Number</th>
+                                    <th>Customer Name</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
 
+
                             <tbody class="text-center">
+
                                 <tr>
                                     <td>1</td>
-                                    <td><img src="../assets/images/1.jpeg" class="product-img"></td>
-                                    <td>TSHIRT-001</td>
-                                    <td>Black</td>
+                                    <td>DC-20250115-101</td>
+                                    <td>ABC Textiles</td>
+                                    <td>15-01-2025</td>
                                     <td>
-                                        <span class="size-pill">M</span>
-                                        <span class="size-pill">L</span>
-                                        <span class="size-pill">XL</span>
-                                        <span class="size-pill">XXL</span>
+                                        <span class="badge bg-warning text-dark">Pending</span>
                                     </td>
-                                    <td> ₹599 </td>
-                                    <td> ₹499 </td>
-                                    <td> ₹300 </td>
                                     <td>
-                                        <a href="./edit-user.html" class="btn btn-sm btn-outline-primary">
+                                        <button class="btn btn-outline-primary btn-sm action-btn">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                        <button class="btn btn-outline-warning btn-sm action-btn">
                                             <i class="bi bi-pencil"></i>
-                                        </a>
-
-                                        <a href="./delete-user.html" class="btn btn-sm btn-outline-danger">
+                                        </button>
+                                        <button class="btn btn-outline-danger btn-sm action-btn">
                                             <i class="bi bi-trash"></i>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
 
                                 <tr>
                                     <td>2</td>
-                                    <td><img src="../assets/images/2.jpeg" class="product-img"></td>
-                                    <td>TSHIRT-002</td>
-                                    <td>Blue</td>
+                                    <td>DC-20250115-102</td>
+                                    <td>XYZ Garments</td>
+                                    <td>15-01-2025</td>
                                     <td>
-                                        <span class="size-pill">S</span>
-                                        <span class="size-pill">M</span>
+                                        <span class="badge bg-success">Dispatched</span>
                                     </td>
-                                    <td> ₹699 </td>
-                                    <td> ₹549 </td>
-                                    <td> ₹320 </td>
                                     <td>
-                                        <a href="./edit-user.html" class="btn btn-sm btn-outline-primary">
+                                        <button class="btn btn-outline-primary btn-sm action-btn">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                        <button class="btn btn-outline-warning btn-sm action-btn">
                                             <i class="bi bi-pencil"></i>
-                                        </a>
-
-                                        <a href="./delete-user.html" class="btn btn-sm btn-outline-danger">
+                                        </button>
+                                        <button class="btn btn-outline-danger btn-sm action-btn">
                                             <i class="bi bi-trash"></i>
-                                        </a>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>3</td>
+                                    <td>DC-20250114-099</td>
+                                    <td>Retail Hub</td>
+                                    <td>14-01-2025</td>
+                                    <td>
+                                        <span class="badge bg-secondary">Delivered</span>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-outline-primary btn-sm action-btn">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                        <button class="btn btn-outline-warning btn-sm action-btn">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button class="btn btn-outline-danger btn-sm action-btn">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
 
                             </tbody>
+
                         </table>
                     </div>
 
@@ -167,33 +182,35 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
-    <!-- Initialize DataTable -->
     <script>
         $(document).ready(function () {
-            $('#productTable').DataTable({
-                pagingType: "simple_numbers",
+            $('#dcTable').DataTable({
                 pageLength: 10,
-                lengthMenu: [
-                    [10, 25, 50, -1],
-                    [10, 25, 50, "All"]
+
+                // ✅ ENABLE length dropdown
+                lengthChange: true,
+                lengthMenu: [10, 25, 50],
+
+                ordering: true,
+                searching: true,
+                info: true,
+                responsive: true,
+
+                columnDefs: [{
+                        orderable: false,
+                        targets: 5
+                    } // Action column
                 ],
-                language: {
-                    search: "Search:",
-                    lengthMenu: "Show _MENU_ entries",
-                    info: "Showing _START_ to _END_ of _TOTAL_ entries",
-                    infoEmpty: "Showing 0 to 0 of 0 entries",
-                    infoFiltered: "(filtered from _MAX_ total entries)",
-                    paginate: {
-                        first: "First",
-                        last: "Last",
-                        next: "Next",
-                        previous: "Previous"
-                    }
-                },
+
                 order: [
-                    [1, 'asc']
+                    [1, 'desc']
                 ],
-                responsive: true
+
+                // Optional: better text
+                language: {
+                    lengthMenu: "Show _MENU_ entries",
+                    search: "Search:"
+                }
             });
         });
     </script>
@@ -203,106 +220,6 @@
 
     <!-- CUSTOM DASHBOARD JS -->
     <script src="../assets/js/script.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const rows = document.querySelectorAll("#productTable tbody tr");
-            const mobile = document.getElementById("mobileProductCards");
-            const searchInput = document.getElementById("mobileSearch");
-
-            let products = [];
-
-            // Convert table rows to a list of JS objects
-            rows.forEach(row => {
-                const cols = row.querySelectorAll("td");
-
-                products.push({
-                    sno: cols[0].innerText,
-                    imgSrc: cols[1].querySelector("img").src,
-                    code: cols[2].innerText,
-                    color: cols[3].innerText,
-                    sizes: cols[4].innerHTML,
-                    mrp: cols[5].innerText,
-                    sp: cols[6].innerText,
-                    cp: cols[7].innerText
-                });
-            });
-
-            // Render function for cards
-            function renderCards(list) {
-                mobile.innerHTML = "";
-                list.forEach(p => {
-                    const card = `
-    <div class="product-card">
-
-        <div class="card-row d-flex gap-3">
-
-            <!-- LEFT: IMAGE -->
-            <div class="card-img">
-                <img src="${p.imgSrc}">
-            </div>
-
-            <!-- RIGHT: DETAILS -->
-            <div class="card-details flex-grow-1">
-                    <div class="d-flex justify-content-between align-items-center mb-1">
-    <div class="fw-bold fs-6">${p.code}</div>
-    <div class=" fw-semi-bold fs-6" style="font-size:12px;">S.No: ${p.sno}</div>
-</div>
-
-                <div class="text-muted mb-2" style="font-size:13px">${p.color}</div>
-
-                <div class="mb-2">
-                    ${p.sizes}
-                </div>
-<div class="price-row d-flex justify-content-between mt-2">
-
-    <div class="price-pill text-center">
-        <span class="label">MRP</span>
-        <div class="pill-value"> ${p.mrp}</div>
-    </div>
-
-    <div class="price-pill text-center">
-        <span class="label">S.P</span>
-        <div class="pill-value">${p.sp}</div>
-    </div>
-
-    <div class="price-pill text-center">
-        <span class="label">C.P</span>
-        <div class="pill-value">${p.cp}</div>
-    </div>
-
-</div>
-
-           
-
-            </div>
-        </div>
-
-    </div>
-`;
-                    mobile.innerHTML += card;
-                });
-            }
-
-            // Initial load
-            renderCards(products);
-
-            // 🔍 LIVE SEARCH (mobile only)
-            searchInput.addEventListener("input", () => {
-                const val = searchInput.value.toLowerCase();
-
-                const filtered = products.filter(p =>
-                    p.code.toLowerCase().includes(val) ||
-                    p.color.toLowerCase().includes(val) ||
-                    p.sizes.toLowerCase().includes(val) ||
-                    p.mrp.toLowerCase().includes(val) ||
-                    p.sp.toLowerCase().includes(val) ||
-                    p.cp.toLowerCase().includes(val)
-                );
-
-                renderCards(filtered);
-            });
-        });
-    </script>
 
 
 
