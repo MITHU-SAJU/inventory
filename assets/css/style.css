@@ -1132,42 +1132,111 @@ select{
     font-size: 0.9375rem;
 }
 
-/* Table Styling */
-.table {
+/* ===============================
+   MODERN TABLE STYLE
+================================ */
+/* PAGE */
+
+
+
+
+.card-header {
+    background: #ffffff;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eef2f7;
+}
+
+.card-footer {
+    background: #ffffff;
+    padding: 16px 20px;
+    border-top: 1px solid #eef2f7;
+}
+
+/* ADDRESS */
+.address-box {
+    background: #f9fbff;
+    border: 1px dashed #dbe5f1;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 0.9rem;
+}
+
+
+.invoice-table {
     border-collapse: separate;
     border-spacing: 0;
 }
 
-.table thead th {
-    background: #f8fafc;
-    color: #1e293b;
-    font-weight: 600;
-    font-size: 0.875rem;
+.invoice-table thead th {
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 1rem;
-    border-bottom: 2px solid #e2e8f0;
+    color: #6c757d;
+    background: #f8f9fb;
 }
 
-.table tbody td {
-    padding: 1rem;
+.invoice-table td {
+    border-top: 1px solid #eef0f2;
     vertical-align: middle;
-    border-bottom: 1px solid #f1f5f9;
+}
+
+.invoice-table input,
+.invoice-table select {
+    background: #f9fafb;
+    border-radius: 6px;
+}
+
+.invoice-table input:focus,
+.invoice-table select:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}
+
+
+/* TABLE */
+.app-table thead th {
+    background: #f9fbff;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     color: #475569;
-    font-size: 0.9375rem;
+    border-bottom: 1px solid #e6edf5;
 }
 
-
-.table-striped tbody tr:nth-of-type(odd) {
-    background: #fafbfc;
+.app-table tbody td {
+    padding: 14px;
+    vertical-align: middle;
+    border-bottom: 1px solid #eef2f7;
 }
 
-.table-striped tbody tr:nth-of-type(odd):hover {
-    background: #f1f5f9;
+.app-table tbody tr:hover {
+    background: #f8fbff;
 }
+
+/* BUTTONS */
+.btn-primary {
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+.btn-outline-primary {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
+.btn-outline-primary:hover {
+    background: #2563eb;
+    color: #fff;
+}
+
+/* ===============================
+   SUBMIT BUTTON
+================================ */
+
 .submit-btn {
     font-size: 15px;
-    border-radius: 6px;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-weight: 500;
 }
 
 

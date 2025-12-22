@@ -3,42 +3,85 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>View Delivery Challan</title>
+    <title>Delivery Challan</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Your Theme -->
+    <!-- Theme -->
     <link rel="stylesheet" href="../assets/css/style.css">
 
-    <!-- PRINT STYLES -->
     <style>
+        body {
+            background: #f4f6f9;
+        }
+
+        .dc-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        /* ===================== PRINT ONLY ===================== */
         @media print {
 
-            /* Hide non-print elements */
-            .no-print {
+            /* PAGE SETUP */
+            @page {
+                size: A4;
+                margin: 6mm;
+            }
+
+            html,
+            body {
+                width: 210mm;
+                margin: 0;
+                padding: 0;
+                overflow: hidden !important;
+                background: #fff !important;
+            }
+
+            /* HIDE NON-PRINT ELEMENTS */
+            .no-print,
+            .sidebar,
+            nav,
+            header,
+            footer,
+            button,
+            a.btn {
                 display: none !important;
             }
 
-            body {
-                background: #fff !important;
-                margin: 0;
-                padding: 0;
+            /* REMOVE BOOTSTRAP WIDTH LIMITS */
+            .container,
+            .container-fluid,
+            .main {
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
             }
 
-            /* Preserve Bootstrap grid */
+            /* MAIN PRINT AREA */
+            .dc-container {
+                width: 100% !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 8mm !important;
+                /* inner page padding */
+                box-shadow: none !important;
+                border-radius: 0 !important;
+            }
+
+            /* ===== FORCE BOOTSTRAP GRID TO WORK IN PRINT ===== */
             .row {
                 display: flex !important;
-                flex-wrap: wrap !important;
+                flex-wrap: nowrap !important;
+                /* KEEP 3 CARDS IN ONE ROW */
+                width: 100% !important;
             }
 
-            [class*="col-"] {
-                float: none !important;
-            }
-
-            /* Force column widths (Bootstrap md) */
             .col-md-1 {
                 width: 8.333333% !important;
             }
@@ -53,6 +96,8 @@
 
             .col-md-4 {
                 width: 33.333333% !important;
+                flex: 0 0 33.333333% !important;
+                max-width: 33.333333% !important;
             }
 
             .col-md-5 {
@@ -87,225 +132,266 @@
                 width: 100% !important;
             }
 
-            /* Cards look clean in print */
+            /* CARDS */
             .card {
                 box-shadow: none !important;
-                border: 1px solid #ddd !important;
-                break-inside: avoid;
-                page-break-inside: avoid;
+                border: 1px solid #000 !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
             }
 
-            /* Tables stay intact */
+            /* TABLE FIXES */
             table {
-                page-break-inside: auto;
                 width: 100% !important;
+                border-collapse: collapse !important;
+                page-break-inside: avoid !important;
             }
 
             thead {
                 display: table-header-group;
             }
 
-            tfoot {
-                display: table-footer-group;
-            }
-
             tr {
-                page-break-inside: avoid;
-                page-break-after: auto;
+                page-break-inside: avoid !important;
             }
 
-            /* Logo size control */
+            /* BADGES (STATUS) */
+            .badge {
+                background: transparent !important;
+                color: #000 !important;
+                border: 1px solid #000 !important;
+            }
+
+            /* TEXT SPACING */
+            p,
+            h4,
+            h5,
+            h6 {
+                margin-bottom: 6px !important;
+            }
+
+            /* LOGO SIZE */
             img {
-                max-height: 60px;
+                max-height: 60px !important;
             }
         }
     </style>
 
+
+
 </head>
 
 <body>
-
     <div class="d-flex">
 
-        <!-- Sidebar -->
+        <!-- Sidebar Component -->
         <div include-html="../components/sidebar.html" class="no-print"></div>
 
-        <!-- Main -->
+        <!-- MAIN CONTENT -->
         <main class="main p-4 flex-grow-1">
+            <div class="container my-4">
+                <div class="dc-container">
 
-            <!-- HEADER WITH LOGO -->
-            <div class="card shadow-sm mb-4 ">
-                <div class="card-body d-flex justify-content-between align-items-center">
+                    <!-- HEADER -->
+                    <div class="mb-4">
 
-                    <div class="d-flex align-items-center gap-3">
                         <!-- LOGO -->
-                        <img src="../assets/images/logo.png" alt="Company Logo" style="height:50px;">
-                    </div>
-
-                    <div class="d-flex gap-2 no-print">
-                        <button onclick="window.print()" class="btn btn-outline-secondary">
-                            <i class="bi bi-printer"></i> Print
-                        </button>
-                        <button onclick="downloadPDF()" class="btn btn-outline-primary">
-                            <i class="bi bi-file-earmark-pdf"></i> PDF
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- BASIC INFO -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-body">
-
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label class="form-label text-muted">DC Number</label>
-                            <div class="fw-semibold">DC-00045</div>
+                        <div class="text-start mb-2">
+                            <img src="../assets/images/logo.png" alt="Company Logo" style="max-height:70px;">
                         </div>
 
-                        <div class="col-md-4">
-                            <label class="form-label text-muted">Date</label>
-                            <div class="fw-semibold">12-01-2025</div>
+                        <!-- TITLE -->
+                        <h4 class="fw-bold text-center mb-3">DELIVERY CHALLAN</h4>
+
+                        <!-- DC INFO -->
+                        <div class="row align-items-start">
+                            <div class="col-md-6">
+                                <p class="mb-1"><strong>DC No:</strong> DC-00045</p>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <p class="mb-1"><strong>Date:</strong> 12-01-2025</p>
+                            </div>
                         </div>
 
-                        <div class="col-md-4">
-                            <label class="form-label text-muted">Customer</label>
-                            <div class="fw-semibold">ABC Textiles Pvt Ltd</div>
-                        </div>
+                        <hr class="mt-2 mb-4">
                     </div>
 
-                </div>
-            </div>
-
-            <!-- FROM / TO ADDRESS -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-body">
-
-                    <div class="row g-4">
+                    <!-- FROM / TO -->
+                    <div class="row mb-4">
 
                         <!-- FROM -->
-                        <div class="col-md-6">
-                            <h6 class="fw-bold mb-2">From Address</h6>
-                            <div class="border rounded-3 p-3 bg-light">
-                                <strong>CTRL- NEXT</strong><br>
-                                No.45,<br>
-                                Coimbatore – 641001<br>
-                                Tamil Nadu<br>
-                                GST: 33AAAAA0000A1Z5
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <p class="fw-bold mb-1">From</p>
+                                    <h6 class="fw-semibold mb-1">CTRL NEXT</h6>
+                                    <p class="mb-0 small">
+                                        No.45,<br>
+                                        Coimbatore – 641001<br>
+                                        Tamil Nadu<br>
+                                        <strong>GST:</strong> 33AAAAA0000A1Z5
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
                         <!-- TO -->
-                        <div class="col-md-6">
-                            <h6 class="fw-bold mb-2">To (Delivery Address)</h6>
-                            <div class="border rounded-3 p-3 bg-light">
-                                <strong>ABC Textiles Pvt Ltd</strong><br>
-                                No.12, SIDCO Area,<br>
-                                Tiruppur – 641603<br>
-                                Tamil Nadu
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <p class="fw-bold mb-1">Bill to</p>
+                                    <h6 class="fw-semibold mb-1">ABC Textiles Pvt Ltd</h6>
+                                    <p class="mb-0 small">
+                                        No.12, SIDCO Area,<br>
+                                        Tiruppur – 641603<br>
+                                        Tamil Nadu
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-body">
+                                    <p class="fw-bold mb-2">Status</p>
+
+                                    <!-- STATUS -->
+                                    <p class="mb-3">
+                                        <span class="badge bg-warning text-dark">PENDING</span>
+                                        <!-- 
+                <span class="badge bg-success">PAID</span>
+                <span class="badge bg-danger">CANCELLED</span>
+                -->
+                                    </p>
+
+                                    <!-- DUE DATE -->
+                                    <p class="fw-bold mb-1">Due Date</p>
+                                    <p class="mb-0 small text-muted">
+                                        25-01-2025
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
 
-                </div>
-            </div>
-
-            <!-- ITEM DETAILS -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-body">
-
+                    <!-- ITEM DETAILS -->
                     <h6 class="fw-bold mb-3">Item Details</h6>
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered align-middle text-center">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Particulars</th>
-                                    <th>Color</th>
-                                    <th>Size</th>
-                                    <th>Qty</th>
-                                </tr>
-                            </thead>
+                    <div class="card-body mt-3">
+                        <div class="table-responsive">
+                            <table class="table invoice-table align-middle">
+                                <thead class="table-light text-center">
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Particulars</th>
+                                        <th>Color</th>
+                                        <th>Size</th>
+                                        <th class="text-center">Qty</th>
+                                    </tr>
+                                </thead>
 
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>PRD-001</td>
-                                    <td>Black</td>
-                                    <td>L</td>
-                                    <td class="text-end">10</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>PRD-002</td>
-                                    <td>Blue</td>
-                                    <td>M</td>
-                                    <td class="text-end">15</td>
-                                </tr>
-                            </tbody>
+                                <tbody class="text-center">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>PRD-001</td>
+                                        <td>Black</td>
+                                        <td>L</td>
+                                        <td class="text-center">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>PRD-002</td>
+                                        <td>Blue</td>
+                                        <td>M</td>
+                                        <td class="text-center">15</td>
+                                    </tr>
+                                </tbody>
 
-                            <tfoot>
-                                <tr class="fw-semibold">
-                                    <td colspan="4" class="text-end">Total Qty</td>
-                                    <td class="text-end">25</td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
+                                <tfoot>
+                                    <tr class="fw-semibold">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            <div class="d-flex justify-content-center align-items-center">
+                                                <span>Total Qty :</span>
+                                                <span class="fw-semibold">25</span>
+                                            </div>
+                                        </td>
 
-                </div>
-            </div>
 
-            <!-- VEHICLE DETAILS -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-body">
+                                    </tr>
+                                </tfoot>
 
-                    <h6 class="fw-bold mb-3">Vehicle Dispatch Details</h6>
-
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label class="form-label text-muted">Vehicle Number</label>
-                            <div class="fw-semibold">TN 38 AB 1234</div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label class="form-label text-muted">Transporter</label>
-                            <div class="fw-semibold">SR Logistics</div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <label class="form-label text-muted">Driver Contact</label>
-                            <div class="fw-semibold">+91 98765 43210</div>
+                            </table>
                         </div>
                     </div>
 
+
+
+                    <!-- VEHICLE DETAILS -->
+                    <div class="card-body mt-3">
+
+                        <h6 class="fw-bold mb-3">Vehicle Dispatch Details</h6>
+
+                        <div class="row ">
+                            <div class="col-md-4 text-center">
+                                <label class="form-label text-muted">Vehicle Number</label>
+                                <div class="fw-semibold">TN 38 AB 1234</div>
+                            </div>
+
+                            <div class="col-md-4 text-center">
+                                <label class="form-label text-muted">Transporter</label>
+                                <div class="fw-semibold">SR Logistics</div>
+                            </div>
+
+                            <div class="col-md-4 text-center">
+                                <label class="form-label text-muted">Driver Contact</label>
+                                <div class="fw-semibold">+91 98765 43210</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- SIGNATURE SECTION -->
+                    <div class="row mt-5 pt-4">
+
+                        <!-- RECEIVER SIGNATURE -->
+                        <div class="col-md-6 text-start">
+                            <p class="fw-semibold mb-5">Receiver Signature</p>
+                            <div style="border-top: 1px solid #000; width: 220px;"></div>
+                        </div>
+
+                        <!-- AUTHORIZED SIGNATURE -->
+                        <div class="col-md-6 text-end">
+                            <p class="fw-semibold mb-5">Authorized Signature</p>
+                            <div style="border-top: 1px solid #000; width: 220px; margin-left: auto;"></div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
-            <!-- FOOTER -->
+
+            <!-- ACTIONS -->
             <div class="text-center no-print">
-                <a href="delivery-challan-list.html" class="btn btn-secondary px-4">
-                    Back to List
-                </a>
+                <button onclick="window.print()" class="btn btn-primary px-4 py-2 fw-semibold submit-btn">
+                    <i class="bi bi-printer"></i> Print
+                </button>
             </div>
 
-        </main>
+    </div>
+    </div>
+    </main>
     </div>
 
     <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/include.js"></script>
     <script src="../assets/js/script.js"></script>
-
-    <!-- PDF SCRIPT -->
-    <script>
-        function downloadPDF() {
-            window.print();
-        }
-    </script>
 
 </body>
 
