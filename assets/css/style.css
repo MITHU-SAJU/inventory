@@ -411,9 +411,9 @@ select{
 .sidebar-menu a {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
-    font-size: 20px;
+    gap: 15px;
+    padding: 3px 7px;
+    font-size: 17px;
     letter-spacing: 0.5px;
     color: #1e293b;
     border-radius: 8px;
