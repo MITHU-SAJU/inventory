@@ -71,40 +71,76 @@
 
                             <div class="row g-3 mb-3 align-items-end">
 
-                                <!-- BILL TO -->
-                                <div class="col-md-5">
-                                    <label class="form-label">Bill To</label>
-                                    <select class="form-select">
-                                        <option>Select Customer</option>
-                                    </select>
+                                <!-- SEARCH DC NUMBER -->
+                                <div class="col-md-4">
+                                    <label class="form-label">Search Customer</label>
+                                    <input type="text" class="form-control" placeholder="Enter Customer Name">
                                 </div>
 
-                                <!-- PLUS BUTTON -->
-                                <div class="col-md-2 d-flex justify-content-center">
-                                    <a href="./customer-page.html" class="add-box-btn text-decoration-none"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Add New Customer">
-                                        <i class="bi bi-plus-lg"></i>
-                                    </a>
+                                <div class="col-md-4">
+                                    <label class="form-label">Select DC</label>
 
+                                    <div class="dropdown w-100">
+                                        <button class="form-control text-start dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown">
+                                            Select DC
+                                        </button>
+
+                                        <div class="dropdown-menu w-100 p-2">
+
+                                            <!-- Search box -->
+                                            <input type="text" class="form-control mb-2" placeholder="Search DC">
+
+                                            <!-- Options -->
+                                            <button class="dropdown-item">DC-1001</button>
+                                            <button class="dropdown-item">DC-1002</button>
+                                            <button class="dropdown-item">DC-1003</button>
+                                            <button class="dropdown-item">DC-1004</button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- SELECT ALL DC -->
+                                <div class="col-md-4 d-flex align-items-center">
+
+                                    <div class="checkbox-wrapper mt-4">
+
+                                        <input type="checkbox" id="dcCheckbox">
+
+                                        <label for="dcCheckbox" class="terms-label">
+
+                                            <svg class="checkbox-svg" viewBox="0 0 52 52">
+                                                <rect class="checkbox-box" x="1" y="1" width="50" height="50" rx="6"
+                                                    ry="6">
+                                                </rect>
+
+                                                <path class="checkbox-tick" d="M14 27 L22 35 L38 18">
+                                                </path>
+                                            </svg>
+
+                                            <!-- Text -->
+                                            <span class="label-text fw-semibold fs-6 px-2">
+                                                Select All DC
+                                            </span>
+
+                                        </label>
+
+                                    </div>
 
                                 </div>
 
-                                <!-- SHIP TO -->
-                                <div class="col-md-5">
-                                    <label class="form-label">Ship To</label>
-                                    <select class="form-select">
-                                        <option>Same as Billing</option>
-                                    </select>
-                                </div>
+
 
                                 <!-- HELPER TEXT -->
                                 <div class="col-12">
-                                    <p class="mb-0 text-muted fs-5">
-                                        Select an existing customer or create a new one.
+                                    <p class="mb-0 text-muted fs-3">
+                                        Search and select DC numbers from the existing customer records.
                                     </p>
                                 </div>
 
                             </div>
+
 
 
                             <div class="border rounded p-3 bg-light small mt-3">
@@ -125,20 +161,29 @@
 
                             <h5 class="fw-bold mb-3">Invoice Details</h5>
 
-                            <div class="mb-3">
-                                <label class="form-label">Invoice No</label>
-                                <input type="text" class="form-control" value="INV-001" readonly>
-                            </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Invoice Date</label>
                                 <input type="date" class="form-control">
                             </div>
 
-                            <div>
+                            <div class="mb-3">
                                 <label class="form-label">Due Date</label>
                                 <input type="date" class="form-control">
                             </div>
+
+                            <!-- DC NUMBERS DISPLAY BOX -->
+                            <div class="col-12">
+                                <label class="form-label">Selected DC Numbers</label>
+                                <div class="border rounded p-3 bg-light d-flex flex-wrap gap-2">
+
+                                    <span class="badge bg-secondary px-3 py-2">DC-1001</span>
+                                    <span class="badge bg-secondary px-3 py-2">DC-1002</span>
+                                    <span class="badge bg-secondary px-3 py-2">DC-1003</span>
+
+                                </div>
+                            </div>
+
 
                         </div>
                     </div>

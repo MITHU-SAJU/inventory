@@ -1343,3 +1343,56 @@ table.dataTable thead>tr>th.sorting, table.dataTable thead>tr>th.sorting_asc, ta
   background-color: #eef1ff;
   box-shadow: 0 10px 25px rgba(108, 99, 255, 0.15);
 }
+
+
+/* ===== Animated SVG Checkbox ===== */
+
+.checkbox-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  display: none;
+}
+
+/* Label wrapper */
+.checkbox-wrapper .terms-label {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* SVG size */
+.checkbox-wrapper .checkbox-svg {
+  width: 30px;
+  height: 30px;
+}
+
+/* Checkbox box animation */
+.checkbox-wrapper .checkbox-box {
+  fill: rgba(207, 205, 205, 0.425);
+  stroke: #8c00ff;
+  stroke-width: 3;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  transition: stroke-dashoffset 0.6s ease-in;
+}
+
+/* Tick animation */
+.checkbox-wrapper .checkbox-tick {
+  fill: none;
+  stroke: #8c00ff;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 172;
+  stroke-dashoffset: 172;
+  transition: stroke-dashoffset 0.6s ease-in;
+}
+
+/* Checked state */
+.checkbox-wrapper input[type="checkbox"]:checked + .terms-label .checkbox-box,
+.checkbox-wrapper input[type="checkbox"]:checked + .terms-label .checkbox-tick {
+  stroke-dashoffset: 0;
+}
